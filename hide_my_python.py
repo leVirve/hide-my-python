@@ -23,7 +23,7 @@
 
 import sys
 import arguments
-import parser
+import proxy_parser
 import database
 
 def main():
@@ -43,7 +43,7 @@ def main():
 
 	try:
 		# We generate the proxies
-		for proxy in parser.generate_proxy(args):
+		for proxy in proxy_parser.generate_proxy(args):
 			# And we store them in the database
 			database.insert_in_database(cursor, proxy)
 	except KeyboardInterrupt:
