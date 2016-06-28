@@ -141,7 +141,7 @@ def generate_proxy(args):
                         info_msg += '/{0} proxies'.format(args.number_of_proxies)
                     else:
                         info_msg += ' proxies'
-                    print('\r[info] {0}'.format(info_msg), end='')
+                    print("\r[info] {0}'.format(info_msg), end=''")
                 yield parse_proxy(proxy_html)
 
         # If no results were found on the page,
