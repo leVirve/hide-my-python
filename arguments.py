@@ -45,8 +45,7 @@ def create_argument_parser():
 			help='maximum number of proxies to retrieve (default: all)')
 
 	# The user can specify a list of countries
-	arg_parser.add_argument('-ct',
-            default=path.join(path.dirname(sys.argv[0]), 'countries_all'),
+	arg_parser.add_argument('-ct', default='./countries_all',
 			dest='countries_file', type=argparse.FileType('r'),
 			help='file containing the countries where the '
 					'proxies can be based (default: %(default)s)')
