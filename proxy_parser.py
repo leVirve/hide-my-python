@@ -8,23 +8,24 @@
 #   The last function is a generator, which yields proxies.
 #
 #   Copyright (C) 2013 Yannick Méheut <useless (at) utouch (dot) fr>
-# 
+#
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation, either version 3 of the License, or
 #   (at your option) any later version.
-# 
+#
 #   This program is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-# 
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
 import regex
 import connect
+
 
 def parse_ip_port(ip_port_html):
 
@@ -49,6 +50,7 @@ def parse_ip_port(ip_port_html):
     ip, port = ip_port_html.split()
 
     return ip, port
+
 
 def parse_proxy(proxy_html):
 
@@ -81,6 +83,7 @@ def parse_proxy(proxy_html):
     # We return a tuple
     return ip, int(port), type, country, anonymity, speed, connection_time
 
+
 def generate_proxy(args):
     # We build the post request, using the arguments specified by the user
     post_request = connect.build_post_request(args)
@@ -97,13 +100,14 @@ def generate_proxy(args):
 
     # When you do a search, HideMyAss! redirects you to a page.
     # We retrieve the result page's URL
-    r = connect.send_data('http://proxylist.hidemyass.com/',
-            data=post_request, allow_redirects=False)
+    r = connect.send_data(
+        'http://proxylist.hidemyass.com/',
+        data=post_request, allow_redirects=False)
     url = 'http://proxylist.hidemyass.com{0}'.format(r.headers['Location'])
 
     # HideMyAss! checks this cookie to see if you're a legit user
     # (and we totally are!)
-    cookies = {'PHPSESSID' : r.cookies['PHPSESSID']}
+    cookies = {'PHPSESSID': r.cookies['PHPSESSID']}
 
     while keep_retrieving:
         # Even if a page doesn't exist, HideMyAss! doesn't respond
@@ -127,8 +131,7 @@ def generate_proxy(args):
 
             # If a maximum number of proxies was set and we
             # are above this limit, we stop retrieving proxies
-            if (not retrieve_all and
-                number_of_proxies > args.number_of_proxies):
+            if not retrieve_all and number_of_proxies > args.number_of_proxies:
                 keep_retrieving = False
                 break
             # Otherwise, we generate a proxy
@@ -138,7 +141,8 @@ def generate_proxy(args):
                 if args.verbose:
                     info_msg = 'retrieved {0}'.format(number_of_proxies)
                     if args.number_of_proxies > 0:
-                        info_msg += '/{0} proxies'.format(args.number_of_proxies)
+                        info_msg += '/{0} proxies'.format(
+                                        args.number_of_proxies)
                     else:
                         info_msg += ' proxies'
                     print("\r[info] {0}'.format(info_msg), end=''")
@@ -148,4 +152,3 @@ def generate_proxy(args):
         # we stop retrieving proxies
         if not results_on_page:
             keep_retrieving = False
-

@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
-# 	-*- coding: utf8 -*-
+#   -*- coding: utf8 -*-
 #
-# 	HideMyPython! - A parser for the free proxy list on HideMyAss!
+#   HideMyPython! - A parser for the free proxy list on HideMyAss!
 #
-#	This file defines the different needed regular expressions to retrieve
-#	the proxy's parameters from the HideMyAss! proxy list.
+#   This file defines the different needed regular expressions to retrieve
+#   the proxy's parameters from the HideMyAss! proxy list.
 #
-# 	Copyright (C) 2013 Yannick Méheut <useless (at) utouch (dot) fr>
-# 
-# 	This program is free software: you can redistribute it and/or modify
-# 	it under the terms of the GNU General Public License as published by
-# 	the Free Software Foundation, either version 3 of the License, or
-# 	(at your option) any later version.
-# 
-# 	This program is distributed in the hope that it will be useful,
-# 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-# 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# 	GNU General Public License for more details.
-# 
-# 	You should have received a copy of the GNU General Public License
-# 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#   Copyright (C) 2013 Yannick Méheut <useless (at) utouch (dot) fr>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
 
@@ -28,7 +28,7 @@ PROXY_HTML = re.compile(r'<tr class=".*?</tr>', flags=re.DOTALL)
 
 # This regex corresponds to the HTML code containing the IP:port of a proxy
 IP_PORT_HTML = re.compile(r'<td>\s*?<span>\s*?<style>.*?</td>\s*<td>.*?</td>',
-		flags=re.DOTALL)
+                          flags=re.DOTALL)
 
 # This regex is used to find the class which won't be displayed in the IP:port
 # HTML code
@@ -49,26 +49,28 @@ TAGS = re.compile(r'<[^>]*>')
 # This regex is used to recover the HTML code containing the country in the
 # proxy HTML code
 COUNTRY_HTML = re.compile(r'class="country".*?\/>.*?</span>',
-        re.DOTALL)
+                          re.DOTALL)
 
 # This regex is used to recover the country
 COUNTRY = re.compile(r'([a-zA-Z, ]*)</span>')
 
 # This regex is used to recover the HTML code containing the speed in the
 # proxy HTML code
-SPEED_HTML = re.compile(r'<div class="progress-indicator.*?levels="speed" rel.*?>(.*?)</div>',
-		flags=re.DOTALL)
+SPEED_HTML = re.compile(
+        r'<div class="progress-indicator.*?levels="speed" rel.*?>(.*?)</div>',
+        flags=re.DOTALL)
 # This regex is used to recover the speed
 SPEED = re.compile(r'style="width: (\d+)%')
 
 # This regex is used to recover the HTML code containing the connection time in
 # the proxy HTML code
-CONNECT_TIME_HTML = re.compile(r'<div class="progress-indicator.*?levels="speed">(.*?)</div>',
-		flags=re.DOTALL)
+CONNECT_TIME_HTML = re.compile(
+        r'<div class="progress-indicator.*?levels="speed">(.*?)</div>',
+        flags=re.DOTALL)
 # This regex is used to recover the connection time
 CONNECT_TIME = re.compile(r'style="width: (\d+)%')
 
 # This regex is used to recover the type and anonymity level in the proxy
 # HTML code
-TYPE_ANONYMITY = re.compile(r'<td>\s*(.*)\s*</td>\s*<td.*?>\s*(.*)</td>\s*</tr>')
-
+TYPE_ANONYMITY = re.compile(
+        r'<td>\s*(.*)\s*</td>\s*<td.*?>\s*(.*)</td>\s*</tr>')
