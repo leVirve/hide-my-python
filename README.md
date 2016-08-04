@@ -51,7 +51,7 @@ $ python setup.py install
         ports=[80, 8080],						# list of numbers (max: 20 specified)
         protocols=['http', 'https', 'socks'],	# three choices for switching on/off
         keep_alive=True,  	# choices: Treu / False
-        anonymity=3,  		# levels Slow, Medium, Fast, Fast+KeepAlive from (0, 1, 2, 3)
+        anonymity=2,  		# levels Slow, Medium, Fast, Fast+KeepAlive from (0, 1, 2, 3)
         speed=2,  			# levels Slow, Medium, Fast from (0, 1, 2)
         connection_time=2,  # levels Slow, Medium, Fast from (0, 1, 2)
         verbose=False	# print details
