@@ -79,7 +79,7 @@ Just go to your favoriate terminal and with the following command:
 $ hidemypython -h
 	
 	usage: hide_my_python [-h] -o DATABASE_FILE [-n NUMBER_OF_PROXIES]
-						  [-ct COUNTRIES_FILE] [-p PORTS [PORTS ...]]
+						  [-ct COUNTRIES_LIST] [-p PORTS [PORTS ...]]
 						  [-pr {http,https,socks} [{http,https,socks} ...]] [-a]
 						  [-ka] [-s] [-c] [-v]
 
@@ -89,8 +89,8 @@ $ hidemypython -h
 	  -h, --help            show this help message and exit
 	  -o DATABASE_FILE      database file where the proxies will be saved
 	  -n NUMBER_OF_PROXIES  maximum number of proxies to retrieve (default: all)
-	  -ct COUNTRIES_FILE    file containing the countries where the proxies can be
-							based (default: countries_all)
+	  -ct COUNTRIES_LIST    strings list containing the countries the proxies can
+	  						be based (default: countries_all)
 	  -p PORTS [PORTS ...]  list of ports (max: 20 ports) the proxies listen on
 							(default: every port)
 	  -pr {http,https,socks} [{http,https,socks} ...]
