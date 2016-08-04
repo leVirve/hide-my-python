@@ -11,12 +11,13 @@ A parser for the free proxy list on HideMyAss! **Now, it can be imported as Pyth
 
 ## Declaration
 
-This project forks from [the-useless-one/hide_my_python](hide_my_python). I
-don't originally own it, my works are modifications on `hide_my_python` and 
-make it a better Python package. All `pr`-prefixed commits come from pull 
-requests in original project [hide_my_python](hide_my_python).
+This origin sources belong to [the-useless-one][hide_my_python].
+My works is making `hide_my_python` into a Python package, and some modifications to simplify.
+
+*Note: All `pr`-prefixed commits come from pull requests in original project [hide_my_python][hide_my_python-pr].*
 
 [hide_my_python]: https://github.com/the-useless-one/hide_my_python
+[hide_my_python-pr]: https://github.com/the-useless-one/hide_my_python/pulls
 
 ## Requirements
 
