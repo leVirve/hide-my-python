@@ -62,11 +62,11 @@ $ python setup.py install
 
 ### Command line
 
-For command line feature, you should add lines shown below into your `setup.py` and setup install again!
+If you don't want any command line feature, you can remove lines shown below 
+in your `setup.py` and setup install again!
 
 ```python
 	# setup.py
-
     entry_points = {
         'console_scripts': ['hidemypython=hidemypython.cli:main'],
     },
