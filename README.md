@@ -7,20 +7,20 @@
 	|_|  |_|_|\__,_|\___|_|  |_|\__, |_|    \__, |\__|_| |_|\___/|_| |_(_)
 								 __/ |       __/ |                        
 								|___/       |___/                         
-A parser for the free proxy list on HideMyAss! **Now, it can be used as Python package.**
+A parser for the free proxy list on HideMyAss! **Now, it can be imported as Python package.**
 
 ## Declaration
 
-This project forks from [the-useless-one/hide_my_python](hide_my_python); I
-don't originally own it. I modify `hide_my_python` into a valid Python package.
-All `pr`-prefixed commits come from pull requests in original project [hide_my_python](hide_my_python)
+This project forks from [the-useless-one/hide_my_python](hide_my_python). I
+don't originally own it, my works are modifications on `hide_my_python` and 
+make it a better Python package. All `pr`-prefixed commits come from pull 
+requests in original project [hide_my_python](hide_my_python).
 
 [hide_my_python]: https://github.com/the-useless-one/hide_my_python
 
 ## Requirements
 
-- Python 3
-- Python package `requests`
+Python 2.7+, Python 3.3+
 
 ## Installation
 
@@ -33,12 +33,12 @@ or
 clone the project, and then
 
 ```bash
-python setup.py install
+$ python setup.py install
 ```
 
 ## Usages
 
-- Programable
+### Programable
 
 ```python
 	from hidemypython.proxy_parser import generate_proxy
@@ -59,7 +59,7 @@ python setup.py install
     proxies = generate_proxy(params)  # a <generator> of available proies!!
 ```
 
-- Command line
+### Command line
 
 For a command line feature, you should add lines shownbelow into your `setup.py`
 
@@ -77,13 +77,10 @@ Just go to your favoriate terminal and with the following command:
 
 where `output_file` is the database file where the proxies will be stored.
 
-Don't forget to make the script executable with:
-
-    chmod +x hide_my_python.py
 
 To see a list of the options, just issue:
 
-	./hide_my_python.py -h
+	$ hidemypython -h
 	usage: hide_my_python [-h] -o DATABASE_FILE [-n NUMBER_OF_PROXIES]
 						  [-ct COUNTRIES_FILE] [-p PORTS [PORTS ...]]
 						  [-pr {http,https,socks} [{http,https,socks} ...]] [-a]
@@ -142,7 +139,7 @@ following structure:
 If this argument is defined, the script will only return the first `n`
 proxies he finds. Otherwise, every found proxy will be returned. For example:
 
-	./hide_my_python.py -n 25 -o output.db
+	$ hidemypython -n 25 -o output.db
 
 will only return the first 25 proxies.
 
@@ -157,7 +154,7 @@ file. To see a complete list of the available countries, see the file
 The script will only return proxies listening on the specified ports. You can
 specify up to 20 different ports. For example:
 
-	./hide_my_python.py -p 80 8080 443 -o output.db
+	$ hidemypython -p 80 8080 443 -o output.db
 
 will only return proxies listening either on port 80, 8080, or 443.
 
@@ -166,7 +163,7 @@ will only return proxies listening either on port 80, 8080, or 443.
 The script will only return proxies using the specified protocols. The possible
 protocols are HTTP, HTTPS, and SOCKS4/5. For example:
 
-	./hide_my_python.py -pr http socks -o output.db
+	$ hidemypython -pr http socks -o output.db
 
 will only return proxies using HTTP or SOCKS4/5.
 
@@ -194,13 +191,13 @@ By default, the script doesn't take into account the proxies' anonymity
 (they can have an anonymity level of None, High, Medium, ...). But this
 command:
 
-	./hide_my_python.py -a -o output.db
+	$ hidemypython -a -o output.db
 
 will only return proxies with an anonymity level of at least Low.
 
 This command:
 
-	./hide_my_python.py -aa -o output.db
+	$ hidemypython -aa -o output.db
 
 will only return proxies with an anonymity level of at least Medium.
 
@@ -211,7 +208,7 @@ most likely honey pots. In order to avoid them, the script, by default, doesn't
 retrieve proxies with an anonymity level of High +KA. If you want proxies with
 the Keep Alive option, use this flag:
 
-	./hide_my_python.py -ka -o output.db
+	$ hidemypython -ka -o output.db
 
 ### Speed
 
@@ -226,13 +223,13 @@ levels:
 By default, the script doesn't take into account the proxies' speed (they can
 have a speed of Slow, Medium, Fast). But this command:
 
-	./hide_my_python.py -s -o output.db
+	$ hidemypython -s -o output.db
 
 will only return proxies with a speed level of at least Medium.
 
 This command:
 
-	./hide_my_python.py -ss -o output.db
+	$ hidemypython -ss -o output.db
 
 will only return proxies with a speed level of at least Fast.
 
@@ -249,13 +246,13 @@ time levels:
 By default, the script doesn't take into account the proxies' connection time
 (they can have a connection time of Slow, Medium, Fast). But this command:
 
-	./hide_my_python.py -c -o output.db
+	$ hidemypython -c -o output.db
 
 will only return proxies with a connection time level of at least Medium.
 
 This command:
 
-	./hide_my_python.py -cc -o output.db
+	$ hidemypython -cc -o output.db
 
 will only return proxies with a connection time level of at least Fast.
 
@@ -265,7 +262,7 @@ If the `-v` flag is used, the script will described what is being done.
 First, it will display the arguments, then it will print the progress of the
 parsing.
 
-	./hide_my_python.py -o output.db -p 80 8080 -n 100 -v
+	$ hidemypython -o output.db -p 80 8080 -n 100 -v
 	[info] number of proxies: 100
 	[info] countries: ['China', 'Indonesia', 'United States', 'Brazil', 'Venezuela'] and 86 more
 	[info] ports: 80, 8080
