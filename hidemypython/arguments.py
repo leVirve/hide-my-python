@@ -25,6 +25,8 @@
 
 import argparse
 
+from hidemypython import const
+
 
 def create_argument_parser():
     arg_parser = argparse.ArgumentParser(
@@ -46,10 +48,11 @@ def create_argument_parser():
 
     # The user can specify a list of countries
     arg_parser.add_argument(
-            '-ct', default='./countries_all',
-            dest='countries_file', type=argparse.FileType('r'),
-            help='file containing the countries where the '
-                 'proxies can be based (default: %(default)s)')
+            '-ct', type=str, nargs='+',
+            default=const.countries_all,
+            dest='countries_list',
+            help='list of countries where the '
+                 'proxies can be based (default: all available)')
 
     # The user can specify a list of ports
     arg_parser.add_argument(
@@ -110,12 +113,6 @@ def process_arguments(args, arg_parser):
                 + '(a positive integer is required): {1}'
         error_msg = error_msg.format('-n', args.number_of_proxies)
         arg_parser.error(error_msg)
-
-    # We retrieve the countries from the given file
-    args.countries_list = []
-    for country in args.countries_file.readlines():
-        country = country.rstrip()
-        args.countries_list.append(country)
 
     # If ports were specified
     if args.ports:
