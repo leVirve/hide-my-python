@@ -62,9 +62,11 @@ $ python setup.py install
 
 ### Command line
 
-For a command line feature, you should add lines shownbelow into your `setup.py`
+For command line feature, you should add lines shown below into your `setup.py` and setup install again!
 
 ```python
+	# setup.py
+
     entry_points = {
         'console_scripts': ['hidemypython=hidemypython.cli:main'],
     },
@@ -73,15 +75,9 @@ For a command line feature, you should add lines shownbelow into your `setup.py`
 Just go to your favoriate terminal and with the following command:
 
 ```bash
-    $ hidemypython -o <output_file>
-```
 
-where `output_file` is the database file where the proxies will be stored.
-
-
-To see a list of the options, just issue:
-
-	$ hidemypython -h
+$ hidemypython -h
+	
 	usage: hide_my_python [-h] -o DATABASE_FILE [-n NUMBER_OF_PROXIES]
 						  [-ct COUNTRIES_FILE] [-p PORTS [PORTS ...]]
 						  [-pr {http,https,socks} [{http,https,socks} ...]] [-a]
@@ -115,9 +111,9 @@ To see a list of the options, just issue:
 							level to Medium, -cc to Fast (default minimum level:
 							Slow)
 	  -v                    explain what is being done
+```
 
-	Go to https://hidemyass.com/proxy-list/ to see the different available
-	options.
+Go to https://hidemyass.com/proxy-list/ to see the different available options.
 
 ### Database file
 
