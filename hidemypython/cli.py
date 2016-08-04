@@ -41,23 +41,23 @@ def main():
         arguments.print_arguments(args)
 
     # We open the database file where the proxies will be stored
-    connection, cursor = database.initialize_database(args.database_file)
+    if args.database_file:
+        connection, cursor = database.initialize_database(args.database_file)
 
     try:
         # We generate the proxies
         for proxy in proxy_parser.generate_proxy(args):
             # And we store them in the database
-            database.insert_in_database(cursor, proxy)
+            if args.database_file:
+                database.insert_in_database(cursor, proxy)
+            else:
+                print(proxy)
     except KeyboardInterrupt:
         if args.verbose:
             print('')
             print('[warn] received interruption signal')
 
     # We save the changes made to the database, and close the file
-    connection.commit()
-    connection.close()
-
-    return 0
-
-if __name__ == '__main__':
-    main()
+    if args.database_file:
+        connection.commit()
+        connection.close()

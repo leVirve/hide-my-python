@@ -78,7 +78,7 @@ Just go to your favoriate terminal and with the following command:
 
 $ hidemypython -h
 	
-	usage: hide_my_python [-h] -o DATABASE_FILE [-n NUMBER_OF_PROXIES]
+	usage: hide_my_python [-h] [-o DATABASE_FILE] [-n NUMBER_OF_PROXIES]
 						  [-ct COUNTRIES_LIST] [-p PORTS [PORTS ...]]
 						  [-pr {http,https,socks} [{http,https,socks} ...]] [-a]
 						  [-ka] [-s] [-c] [-v]
@@ -116,6 +116,8 @@ $ hidemypython -h
 Go to https://hidemyass.com/proxy-list/ to see the different available options.
 
 ### Database file
+
+If this argument is not defined, the result will `print` on the screen (`stdout`).
 
 The proxies will be saved in this file. If the file doesn't exist, it will be
 created. If it exists, the proxies will be appended to it (the file won't be
