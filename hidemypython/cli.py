@@ -22,9 +22,10 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
-import arguments
-import proxy_parser
-import database
+
+from hidemypython import arguments
+from hidemypython import proxy_parser
+from hidemypython import database
 
 
 def main():

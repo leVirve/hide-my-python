@@ -23,8 +23,9 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import regex
-import connect
+
+from hidemypython import regex
+from hidemypython import connect
 
 
 def parse_ip_port(ip_port_html):
