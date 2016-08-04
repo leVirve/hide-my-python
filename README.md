@@ -47,14 +47,14 @@ $ python setup.py install
 
     params = Dict(
         number_of_proxies=20,
-        countries_list=['Taiwan', 'Japan'],
-        ports=[80, 8080],
-        protocols=['http', 'https', 'socks'],
+        countries_list=['Taiwan', 'Japan'],		# list of strings
+        ports=[80, 8080],						# list of numbers (max: 20 specified)
+        protocols=['http', 'https', 'socks'],	# three choices for switching on/off
         keep_alive=True,  	# choices: Treu / False
-        anonymity=3,  		# levels from (0, 1, 2, 3)
-        speed=2,  			# levels from (0, 1, 2)
-        connection_time=2,  # levels from (0, 1, 2)
-        verbose=False
+        anonymity=3,  		# levels Slow, Medium, Fast, Fast+KeepAlive from (0, 1, 2, 3)
+        speed=2,  			# levels Slow, Medium, Fast from (0, 1, 2)
+        connection_time=2,  # levels Slow, Medium, Fast from (0, 1, 2)
+        verbose=False	# print details
     )
 
     proxies = generate_proxy(params)  # a <generator> of available proies!!
@@ -78,51 +78,45 @@ Just go to your favoriate terminal and with the following command:
 
 $ hidemypython -h
 	
-	usage: hide_my_python [-h] [-o DATABASE_FILE] [-n NUMBER_OF_PROXIES]
-						  [-ct COUNTRIES_LIST] [-p PORTS [PORTS ...]]
-						  [-pr {http,https,socks} [{http,https,socks} ...]] [-a]
-						  [-ka] [-s] [-c] [-v]
+usage: hide_my_python [-h] [-o DATABASE_FILE] [-n NUMBER_OF_PROXIES]
+						[-ct COUNTRIES_LIST] [-p PORTS [PORTS ...]]
+						[-pr {http,https,socks} [{http,https,socks} ...]] [-a]
+						[-ka] [-s] [-c] [-v]
 
-	A parser to retrieve proxies from HideMyAss!
+A parser to retrieve proxies from HideMyAss!
 
-	optional arguments:
-	  -h, --help            show this help message and exit
-	  -o DATABASE_FILE      database file where the proxies will be saved
-	  -n NUMBER_OF_PROXIES  maximum number of proxies to retrieve (default: all)
-	  -ct COUNTRIES_LIST    strings list containing the countries the proxies can
-	  						be based (default: countries_all)
-	  -p PORTS [PORTS ...]  list of ports (max: 20 ports) the proxies listen on
-							(default: every port)
-	  -pr {http,https,socks} [{http,https,socks} ...]
-							protocols used by the proxies (default: HTTP, HTTPS
-							and SOCKS4/5)
-	  -a                    flag used to determine the proxies minimum anonymity
-							level, e.g. -a sets the minimum anonymity level to
-							Low, -aa to Medium, -aaa to High, etc. (default
-							minimum level: None)
-	  -ka                   flag used to determine if proxies with the Keep Alive
-							option should be returned, as they are likely honey
-							pots (default: no)
-	  -s                    flag used to determine the proxies minimum speed
-							level, e.g. -s sets the minimum speed level to Medium,
-							-ss to Fast (default minimum level: Slow)
-	  -c                    flag used to determine the proxies minimum connection
-							time level, e.g. -c sets the minimum connection time
-							level to Medium, -cc to Fast (default minimum level:
-							Slow)
-	  -v                    explain what is being done
+optional arguments:
+	-h, --help            show this help message and exit
+
+	-o DATABASE_FILE      database file where the proxies will be saved
+
+	-n NUMBER_OF_PROXIES
+		maximum number of proxies to retrieve (default: all)
+	-ct COUNTRIES_LIST
+		list of the countries strings the proxies can be based (default: all available countries)
+	-p PORTS [PORTS ...]
+		list of ports (max: 20 ports) the proxies listen on (default: every port)
+	-pr {http,https,socks} [{http,https,socks} ...]
+		protocols used by the proxies (default: HTTP, HTTPS and SOCKS4/5)
+
+	-a                    flag to determine the proxies minimum anonymity level.
+							e.g. -a sets to Low, -aa to Medium, -aaa to High.  (default: None)
+	-ka                   flag to determine if proxies with the `Keep Alive` should be returned (default: no)
+	-s                    flag to determine the proxies minimum speed level.
+							e.g. -s setsto Medium, -ss to Fast (default minimum level: Slow)
+	-c                    flag to determine the proxies minimum connection time level.
+							e.g. -c sets to Medium, -cc to Fast (default minimum level: Slow)
+	-v                    explain what is being done
 ```
 
 Go to https://hidemyass.com/proxy-list/ to see the different available options.
 
 ### Database file
 
-If this argument is not defined, the result will `print` on the screen (`stdout`).
+*If this argument is not defined, the result will `print` on the screen (`stdout`).*
 
-The proxies will be saved in this file. If the file doesn't exist, it will be
-created. If it exists, the proxies will be appended to it (the file won't be
-overwritten). The database contains only one table, named `proxies`, with the
-following structure:
+If the file doesn't exist, it will be created and the proxies will be appended to 
+it (won't be overwritten). The database contains only one table, named `proxies`, structured as:
 
 * `id`: a unique identifier (type: `INTEGER PRIMARY KEY AUTOINCREMENT`)
 * `ip`: the proxy's IP address (type: `TEXT`)
@@ -138,22 +132,22 @@ following structure:
 If this argument is defined, the script will only return the first `n`
 proxies he finds. Otherwise, every found proxy will be returned. For example:
 
-	$ hidemypython -n 25 -o output.db
+	$ hidemypython -n 25
 
 will only return the first 25 proxies.
 
-### Countries file
+### Countries list
 
 The script will only return proxies based in the countries specified in this
-file. To see a complete list of the available countries, see the file
-`countries_all`.
+list. To see a complete list of the available countries, see the file
+`countries_all` in `const.py`.
 
 ### Ports
 
 The script will only return proxies listening on the specified ports. You can
 specify up to 20 different ports. For example:
 
-	$ hidemypython -p 80 8080 443 -o output.db
+	$ hidemypython -p 80 8080 443
 
 will only return proxies listening either on port 80, 8080, or 443.
 
@@ -162,7 +156,7 @@ will only return proxies listening either on port 80, 8080, or 443.
 The script will only return proxies using the specified protocols. The possible
 protocols are HTTP, HTTPS, and SOCKS4/5. For example:
 
-	$ hidemypython -pr http socks -o output.db
+	$ hidemypython -pr http socks
 
 will only return proxies using HTTP or SOCKS4/5.
 
@@ -190,13 +184,13 @@ By default, the script doesn't take into account the proxies' anonymity
 (they can have an anonymity level of None, High, Medium, ...). But this
 command:
 
-	$ hidemypython -a -o output.db
+	$ hidemypython -a
 
 will only return proxies with an anonymity level of at least Low.
 
 This command:
 
-	$ hidemypython -aa -o output.db
+	$ hidemypython -aa
 
 will only return proxies with an anonymity level of at least Medium.
 
@@ -207,7 +201,7 @@ most likely honey pots. In order to avoid them, the script, by default, doesn't
 retrieve proxies with an anonymity level of High +KA. If you want proxies with
 the Keep Alive option, use this flag:
 
-	$ hidemypython -ka -o output.db
+	$ hidemypython -ka
 
 ### Speed
 
@@ -222,13 +216,13 @@ levels:
 By default, the script doesn't take into account the proxies' speed (they can
 have a speed of Slow, Medium, Fast). But this command:
 
-	$ hidemypython -s -o output.db
+	$ hidemypython -s
 
 will only return proxies with a speed level of at least Medium.
 
 This command:
 
-	$ hidemypython -ss -o output.db
+	$ hidemypython -ss
 
 will only return proxies with a speed level of at least Fast.
 
@@ -245,13 +239,13 @@ time levels:
 By default, the script doesn't take into account the proxies' connection time
 (they can have a connection time of Slow, Medium, Fast). But this command:
 
-	$ hidemypython -c -o output.db
+	$ hidemypython -c
 
 will only return proxies with a connection time level of at least Medium.
 
 This command:
 
-	$ hidemypython -cc -o output.db
+	$ hidemypython -cc
 
 will only return proxies with a connection time level of at least Fast.
 
@@ -261,7 +255,7 @@ If the `-v` flag is used, the script will described what is being done.
 First, it will display the arguments, then it will print the progress of the
 parsing.
 
-	$ hidemypython -o output.db -p 80 8080 -n 100 -v
+	$ hidemypython -p 80 8080 -n 100 -v
 	[info] number of proxies: 100
 	[info] countries: ['China', 'Indonesia', 'United States', 'Brazil', 'Venezuela'] and 86 more
 	[info] ports: 80, 8080
@@ -270,7 +264,7 @@ parsing.
 	[info] speed: ['Medium', 'High']
 	[info] retrieved 100/100 proxies
 
-## COPYRIGHT
+## Copyright
 
 HideMyPython! - A parser for the free proxy list on HideMyAss!
 
