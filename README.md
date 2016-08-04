@@ -7,37 +7,73 @@
 	|_|  |_|_|\__,_|\___|_|  |_|\__, |_|    \__, |\__|_| |_|\___/|_| |_(_)
 								 __/ |       __/ |                        
 								|___/       |___/                         
+A parser for the free proxy list on HideMyAss! **Now, it can be used as Python package.**
 
-A parser for the free proxy list on HideMyAss!
+## Declaration
 
-Fork me on [GitHub](https://github.com/the-useless-one/hide_my_python).
+This project forks from [the-useless-one/hide_my_python](hide_my_python); I
+don't originally own it. I modify `hide_my_python` into a valid Python package.
+All `pr`-prefixed commits come from pull requests in original project [hide_my_python](hide_my_python)
 
-## HISTORY
+[hide_my_python]: https://github.com/the-useless-one/hide_my_python
 
-I was reading this article on [the blog of the Blue Shell Group](https://blueshellgroup.wordpress.com/2013/04/14/creating-a-private-database-of-proxies-part-1/),
-and I thought at first "Meh, it'll just be parsing". But when I read the second
-part of the article, and saw how HideMyAss! didn't want you to parse its proxy
-list, the mischief that I am wanted to do nothing else but parse its proxy
-list.
+## Requirements
 
-So here's my implementation in Python of a parser for the free proxy list on
-HideMyAss! I hope someone will find it useful.
+- Python 3
+- Python package `requests`
 
-## DISCLAIMER
+## Installation
 
-Oh, and I'm not responsible for anything that happens to you or that you do
-using these proxies. If someone gets pwned, don't look at me.
+```bash
+$ pip install git+https://github.com/leVirve/hide_my_python#egg=hidemypython
+```
 
-## REQUIREMENTS
+or
 
-All you need is Python 3, and the Python requests library.
+clone the project, and then
 
-## USAGE
+```bash
+python setup.py install
+```
 
-Just go to the `hide_my_python` directory and type
-the following command:
+## Usages
 
-    ./hide_my_python.py -o <output_file>
+- Programable
+
+```python
+	from hidemypython.proxy_parser import generate_proxy
+	from hidemypython.utils import Dict
+
+    params = Dict(
+        number_of_proxies=20,
+        countries_list=['Taiwan', 'Japan'],
+        ports=[80, 8080],
+        protocols=['http', 'https', 'socks'],
+        keep_alive=True,  	# choices: Treu / False
+        anonymity=3,  		# levels from (0, 1, 2, 3)
+        speed=2,  			# levels from (0, 1, 2)
+        connection_time=2,  # levels from (0, 1, 2)
+        verbose=False
+    )
+
+    proxies = generate_proxy(params)  # a <generator> of available proies!!
+```
+
+- Command line
+
+For a command line feature, you should add lines shownbelow into your `setup.py`
+
+```python
+    entry_points = {
+        'console_scripts': ['hidemypython=hidemypython.cli:main'],
+    },
+```
+
+Just go to your favoriate terminal and with the following command:
+
+```bash
+    $ hidemypython -o <output_file>
+```
 
 where `output_file` is the database file where the proxies will be stored.
 
