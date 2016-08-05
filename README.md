@@ -11,8 +11,8 @@ A parser for the free proxy list on HideMyAss! **Now, it can be imported as Pyth
 
 ## Declaration
 
-This origin sources belong to [the-useless-one][hide_my_python].
-My works is making `hide_my_python` into a Python package, and some modifications to simplify.
+The origin sources belong to [the-useless-one][hide_my_python].
+My work is making `hide_my_python` into a Python package, and some modifications to simplify.
 
 *Note: All `pr`-prefixed commits come from pull requests in original project [hide_my_python][hide_my_python-pr].*
 
@@ -57,7 +57,7 @@ $ python setup.py install
         verbose=False	# print details
     )
 
-    proxies = generate_proxy(params)  # a <generator> of available proies!!
+    proxies = generate_proxy(params)  # a <generator> of available proxies!!
 ```
 
 ### Command line
